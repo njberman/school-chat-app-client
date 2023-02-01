@@ -37,7 +37,7 @@ const messages = ref([]);
 const allowedToSend = ref(true);
 
 // const URL = 'ws://localhost:6969';
-const URL = 'ws://school-chat-app-server.onrender.com';
+const URL = 'wss://school-chat-app-server.onrender.com';
 
 const ws = new WebSocket(URL);
 ws.onerror = console.error;

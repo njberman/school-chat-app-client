@@ -51,7 +51,8 @@ import { ref, defineEmits } from 'vue';
 import OPEN_EYE from '@/assets/icons/eye.svg';
 import CLOSED_EYE from '@/assets/icons/eye-off.svg';
 
-const URL = 'http://localhost:6969';
+// const URL = 'http://localhost:6969';
+const URL = 'https://school-chat-app-server.onrender.com';
 
 const username = ref('');
 const password = ref('');
