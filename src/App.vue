@@ -1,12 +1,12 @@
 <template>
-  <div class="container mx-auto h-screen">
+  <div class="container mx-auto h-screen overflow-hidden">
     <h1 class="text-5xl text-center m-4">Hasmo Chat</h1>
     <div v-if="start" class="container mx-auto h-screen">
       <LoginPage v-if="loggingIn" @login="login" />
       <ChatPage v-if="!loggingIn" />
     </div>
-    <div v-if="!start">
-      <img src="@/assets/images/loading-gif.gif" alt="Loading..." class="w-1/4 mx-auto" />
+    <div v-if="!start" class="w-1/4 h-full grid place-items-center mx-auto">
+      <img src="@/assets/images/loading-gif.gif" alt="Loading..." class="w-full mx-auto" />
     </div>
   </div>
 </template>

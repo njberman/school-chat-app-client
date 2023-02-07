@@ -4,7 +4,9 @@
 <template>
   <div class="container mx-auto h-full">
     <div class="container mx-auto h-3/4 rounded-lg">
-      <div class="text-3xl">{{ connected - 1 }} other people online right now.</div>
+      <div class="text-3xl">
+        {{ connected - 1 }} other {{ connected - 1 === 1 ? 'person' : 'people' }} online right now.
+      </div>
       <div class="h-5/6 w-full flex flex-col-reverse overflow-auto">
         <div
           class="message h-30 border-solid border-2 border-white m-0.5 p-2 rounded grid grid-cols-2"
@@ -46,6 +48,7 @@ ws.onerror = console.error;
 
 ws.onopen = () => {
   console.log('[open] Connection Established to websocket');
+  ws.send(`connect ${localStorage.getItem('user')}`);
 };
 
 ws.onmessage = (e) => {

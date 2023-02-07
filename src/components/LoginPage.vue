@@ -1,3 +1,4 @@
+<!-- eslint-disable operator-linebreak -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <template>
@@ -39,7 +40,7 @@
     <div class="alert shadow-lg" v-if="failed">
       <div>
         <img src="@/assets/icons/alert-circle.svg" alt="Alert" />
-        <span>Login / Signup failed</span>
+        <span>{{ errorMessage || 'Login / Signup failed' }}</span>
       </div>
     </div>
   </div>
@@ -61,6 +62,8 @@ const failed = ref(false);
 
 const showPassword = ref(false);
 
+const errorMessage = ref(undefined);
+
 const passwordImgSrc = ref(OPEN_EYE);
 
 const emit = defineEmits(['login']);
@@ -80,7 +83,10 @@ const login = async () => {
   if (json.successful) {
     localStorage.setItem('user', username.value);
     emit('login');
-  } else {
+  } else if (json.error && json.error === 'Someone already connected') {
+    // eslint-disable-next-line operator-linebreak
+    errorMessage.value =
+      'This user is already connected. If this is not you then be scared, because somebody has your password...';
     fail();
   }
 };
