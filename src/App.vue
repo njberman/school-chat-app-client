@@ -5,8 +5,9 @@
       <LoginPage v-if="loggingIn" @login="login" />
       <ChatPage v-if="!loggingIn" />
     </div>
-    <div v-if="!start" class="w-1/4 h-full grid place-items-center mx-auto">
-      <img src="@/assets/images/loading-gif.gif" alt="Loading..." class="w-full mx-auto" />
+    <div v-if="!start" class="w-5/6 h-full grid place-items-center mx-auto">
+      <!-- <img src="@/assets/images/loading-gif.gif" alt="Loading..." class="w-full mx-auto" /> -->
+      <progress class="progress progress-warning w-full mx-auto"></progress>
     </div>
   </div>
 </template>
