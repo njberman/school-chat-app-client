@@ -50,9 +50,9 @@ import axios from 'axios';
 import { ref, defineEmits } from 'vue';
 import OPEN_EYE from '@/assets/icons/eye.svg';
 import CLOSED_EYE from '@/assets/icons/eye-off.svg';
+import url from '@/assets/CONSTANTS';
 
-// const URL = 'http://localhost:6969';
-const URL = 'https://school-chat-app-server.onrender.com';
+const URL = `http${url.includes('localhost') ? '' : 's'}://${url}`;
 
 const username = ref('');
 const password = ref('');

@@ -4,6 +4,7 @@
 <template>
   <div class="container mx-auto h-full">
     <div class="container mx-auto h-3/4 rounded-lg">
+      <div class="text-3xl">{{ connected - 1 }} other people online right now.</div>
       <div class="h-5/6 w-full flex flex-col-reverse overflow-auto">
         <div
           class="message h-30 border-solid border-2 border-white m-0.5 p-2 rounded grid grid-cols-2"
@@ -30,14 +31,15 @@
 <script setup>
 import { ref } from 'vue';
 import { v4 as uuid } from 'uuid';
+import url from '@/assets/CONSTANTS';
 
 const messageInput = ref('');
 
 const messages = ref([]);
 const allowedToSend = ref(true);
+const connected = ref(0);
 
-// const URL = 'ws://localhost:6969';
-const URL = 'wss://school-chat-app-server.onrender.com';
+const URL = `ws${url.includes('localhost') ? '' : 's'}://${url}`;
 
 const ws = new WebSocket(URL);
 ws.onerror = console.error;
@@ -47,7 +49,11 @@ ws.onopen = () => {
 };
 
 ws.onmessage = (e) => {
-  messages.value.unshift(JSON.parse(e.data));
+  if (e.data[0] === '{') {
+    messages.value.unshift(JSON.parse(e.data));
+  } else if (e.data.includes('connected')) {
+    connected.value = Number(e.data.split(' ')[1]);
+  }
 };
 
 const sendMessage = (e) => {
